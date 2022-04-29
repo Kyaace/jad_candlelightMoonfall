@@ -1,0 +1,4 @@
+id=NightSprinters[41.60+]FogPatch
+name=Night Sprinters[41.60+] Fog Patch
+description=Updated/rewritten version of night sprinters for versions 41.60+. Patched for Candlelight servers. In the process of patching to allow running in Foggy conditions (and to sync up with rewardingNightCombat)
+poster=poster.png
