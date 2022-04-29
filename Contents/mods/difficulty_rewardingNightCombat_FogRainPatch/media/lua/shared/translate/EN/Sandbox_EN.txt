@@ -85,4 +85,7 @@ Sandbox_EN = {
     Sandbox_RewardingNightCombat_multiplierLevels_option11 = "5x",
     Sandbox_RewardingNightCombat_multiplierLevels_option12 = "7.5x",
     Sandbox_RewardingNightCombat_multiplierLevels_option13 = "10x",
+
+    Sandbox_RewardingNightCombat_enableRain = "Enables XP mod and indicator during rain."
+    Sandbox_RewardingNightCombat_enableFog = "Enables XP mod and indicator during fog."
 }

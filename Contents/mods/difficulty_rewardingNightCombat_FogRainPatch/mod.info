@@ -1,5 +1,5 @@
-name=Rewarding Night Combat
+name=Rewarding Night Combat, Patched for Fog and Rain
 poster=poster.png
-description=The mod allows you to gain bonus experiences for combat skills (Axe, Long Blunt, Short Blunt, Long Blade, Short Blade, Spear, Aiming) between certain hours.
-id=RewardingNightCombat
+description=The mod allows you to gain bonus experiences for combat skills (Axe, Long Blunt, Short Blunt, Long Blade, Short Blade, Spear, Aiming) between certain hours. This is been patched for use on Candlelight servers to add XP modifier and indicator during fog and rain.
+id=RewardingNightCombat_Patch_FogRain
 pzversion=41.68

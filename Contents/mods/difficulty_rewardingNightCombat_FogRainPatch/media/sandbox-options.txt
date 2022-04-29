@@ -165,3 +165,19 @@ option RewardingNightCombat.aimingBonusMultiplier
 	translation = RewardingNightCombat_aimingMultiplier,
 	valueTranslation = RewardingNightCombat_multiplierLevels,
 }
+
+option RewardingNightCombat.enableRain
+{
+	type = boolean,
+	default = true,
+	page = RewardingNightCombat,
+	translation = RewardingNightCombat_enableRain,
+}
+
+option RewardingNightCombat.enableFog
+{
+	type = boolean,
+	default = true,
+	page = RewardingNightCombat,
+	translation = RewardingNightCombat_enableFog,
+}

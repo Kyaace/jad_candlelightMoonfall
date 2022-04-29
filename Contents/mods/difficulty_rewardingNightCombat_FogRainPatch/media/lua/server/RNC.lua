@@ -29,6 +29,8 @@ RewardingNightCombat.applySandboxVars = function()
     RewardingNightCombat.aimingMultiplier = RewardingNightCombat.multipliers[options:getOptionByName("RewardingNightCombat.aimingBonusMultiplier"):getValue()];
     RewardingNightCombat.enabledAimingBonus = RewardingNightCombat.aimingMultiplier ~= 0;
     RewardingNightCombat.ignoreAimingXPNerf = options:getOptionByName("RewardingNightCombat.ignoreAimingXPNerf"):getValue()
+    RewardingNightCombat.enabledRain = options:getOptionByName("RewardingNightCombat.enableRain"):getValue();
+    RewardingNightCombat.enabledFog = options:getOptionByName("RewardingNightCombat.enableFog"):getValue();
 end
 
 RewardingNightCombat.isBetweenTimeInterval = function(current_month, current_hour)
@@ -68,6 +70,31 @@ RewardingNightCombat.isBetweenTimeInterval = function(current_month, current_hou
         end
     end
     return false
+end
+
+RewardingNightCombat.isRainy = function()
+    local rain = RainManager:getRainIntensity();
+	local rv = 0;
+    print("Checking rain: "..rain);
+    if (RewardingNightCombat.enabledRain and rain > rv) then
+        return true;
+    else
+        return false;
+    end
+end
+
+RewardingNightCombat.isFoggy = function()
+    local clim = getClimateManager();
+    local FOG_ID = 5;
+	local fog_Man = clim:getClimateFloat(FOG_ID);
+	local fog = fog_Man:getAdminValue()
+	local fv = 0;
+    print("Checking fog: "..fog);
+    if (RewardingNightCombat.enabledFog and fog > fv) then
+        return true;
+    else
+        return false;
+    end
 end
 
 RewardingNightCombat.OnWeaponHitXp = function(player, weapon, _, damage)
@@ -117,10 +144,14 @@ RewardingNightCombat.OnWeaponHitXp = function(player, weapon, _, damage)
 end
 
 RewardingNightCombat.OnEveryHours = function()
+    print("Checking conditions.")
     local game_time = getGameTime();
     local current_month = game_time:getMonth();
     local current_hour = game_time:getTimeOfDay();
-    RewardingNightCombat.status = RewardingNightCombat.isBetweenTimeInterval(current_month, current_hour);
+    local isTime = RewardingNightCombat.isBetweenTimeInterval(current_month, current_hour);
+    local isRain = RewardingNightCombat.isRainy();
+    local isFog = RewardingNightCombat.isFoggy();
+    RewardingNightCombat.status = isTime or isRain or isFog;
     if RewardingNightCombat.enabledIndicator then
         RewardingNightCombat.updateIndicator(RewardingNightCombat.status);
     end
@@ -134,7 +165,7 @@ RewardingNightCombat.OnGameStart = function()
 
     RewardingNightCombat.OnEveryHours();
 
-    Events.EveryHours.Add(RewardingNightCombat.OnEveryHours);
+    Events.EveryTenMinutes.Add(RewardingNightCombat.OnEveryHours);--Changed to 10 minutes to check more frequently.
     Events.OnWeaponHitXp.Add(RewardingNightCombat.OnWeaponHitXp);
 end
 
